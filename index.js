@@ -97,8 +97,10 @@ export default class SlideDownPanel extends Component {
       }
     };
 
+    const containerStyle = this.props.style ? this.props.style.container : {};
+
     return this.state.isPanMoving ? (
-      <View style={styles.container}>
+      <View style={[styles.container, containerStyle]}>
         {this.props.children}
         <View style={styles.handler} {...this.panResponder.panHandlers}>
           {this.state.handlerView}
@@ -112,7 +114,7 @@ export default class SlideDownPanel extends Component {
         }}
       >
         {({ y }) => (
-          <View style={[styles.container, { height: y }]}>
+          <View style={[styles.container, { height: y }, containerStyle]}>
             {this.props.children}
             <View style={styles.handler} {...this.panResponder.panHandlers}>
               {this.state.handlerView}
@@ -191,5 +193,6 @@ SlideDownPanel.propTypes = {
   containerOpacity: PropTypes.number,
   handlerDefaultView: PropTypes.element,
   handlerBackgroundColor: PropTypes.string,
-  handlerOpacity: PropTypes.number
+  handlerOpacity: PropTypes.number, 
+  style: PropTypes.objectOf(PropTypes.string)
 };
